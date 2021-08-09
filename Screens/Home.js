@@ -20,7 +20,7 @@ function HomeScreen({ navigation }){
   var [jwt, setJwt] = React.useState();
   var [userId, setUserId] = React.useState();
   const [modalVisible, setModalVisible] = React.useState(false);
-
+  
   function updateInfos(){
     //alert("JWT: ", jwt);
 

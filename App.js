@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { TouchableOpacity as TO } from 'react-native-gesture-handler';
 import { Appbar } from 'react-native-paper';
-import { NavigationContainer, useIsFocused } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { FontAwesome, EvilIcons, Ionicons, MaterialIcons} from 'react-native-vector-icons';
@@ -20,6 +20,7 @@ import HomeScreen from './Screens/Home';
 import DiscoverScreen from './Screens/Discover';
 import ProfileScreen from './Screens/Profile';
 import UserProfileScreen from './Screens/UserProfile';
+import SearchUsersScreen from './Screens/SearchUsers';
 import NavigatorScreen from './Screens/Navigator';
 import LogoutScreen from './Screens/Logout';
 import LolScreen from './Screens/Lol';
@@ -77,10 +78,13 @@ const App = ({ navigation }) => {
                 title: 'Ulker Social'
               }} />
               <Drawer.Screen name="Discover" component={DiscoverScreen} options={{
-                title: 'Ulker Social Keşfet'
+                title: 'Keşfet'
               }} />
               <Drawer.Screen name="Navigator" component={NavigatorScreen} options={{
-                title: 'Ulker Social Profil',
+                title: 'Profil',
+              }} />
+              <Drawer.Screen name="Search" component={SearchUsersScreen} options={{
+                title: 'Kullanıcı Arayın',
               }} />
               <Drawer.Screen name="Logout" component={LogoutScreen} options={{
                 title: 'Hoşçakalın 👋 '
