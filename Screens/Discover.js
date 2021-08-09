@@ -10,7 +10,7 @@ import AppBar from '../components/AppBar';
 
 const LeftContent = props => <Image {...props} source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWb2IMkiUnAGkm5UKuK1QSn9lOX8vwh6eIGugdE5ROofhKh4QQ4uyc9F4&s=10" }} style={{ width: 50, height: 50, borderRadius: 25 }} />
 
-function HomeScreen({ navigation }){
+function DiscoverScreen({ navigation }){
   var [posts, setPosts] = React.useState("null");
   var [comments, setComments] = React.useState("null");
   var [makedComment, setMakedComment] = React.useState("");
@@ -30,7 +30,7 @@ function HomeScreen({ navigation }){
     }else{
       //alert("send. " + jwt);
       
-      fetch(`${API_URL}/getsubpost`, {
+      fetch(`${API_URL}/allpost`, {
         type: "POST",
         headers: {
           "Authorization": "Bearer " + jwt
@@ -340,4 +340,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen;
+export default DiscoverScreen;

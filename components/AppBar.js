@@ -9,7 +9,7 @@ function AppBarComponent(props){
       position: 'absolute',
       left: 0,
       right: 0,
-      top: 0,
+      top: 20,
       zIndex: 999999
     }}>
       <MaterialIcons name="menu" size={35} onPress={() => props.navigation.openDrawer()} />

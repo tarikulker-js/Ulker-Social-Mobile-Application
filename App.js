@@ -17,6 +17,10 @@ import LocalStorage from '@react-native-async-storage/async-storage';
 
 //Screens
 import HomeScreen from './Screens/Home';
+import DiscoverScreen from './Screens/Discover';
+import ProfileScreen from './Screens/Profile';
+import UserProfileScreen from './Screens/UserProfile';
+import NavigatorScreen from './Screens/Navigator';
 import LogoutScreen from './Screens/Logout';
 import LolScreen from './Screens/Lol';
 
@@ -72,11 +76,22 @@ const App = ({ navigation }) => {
               <Drawer.Screen name="Home" component={HomeScreen} options={{
                 title: 'Ulker Social'
               }} />
+              <Drawer.Screen name="Discover" component={DiscoverScreen} options={{
+                title: 'Ulker Social Keşfet'
+              }} />
+              <Drawer.Screen name="Navigator" component={NavigatorScreen} options={{
+                title: 'Ulker Social Profil',
+              }} />
               <Drawer.Screen name="Logout" component={LogoutScreen} options={{
                 title: 'Hoşçakalın 👋 '
               }} />
+              <Drawer.Screen name="Profile" component={ProfileScreen} options={{
+                title: '',
+              }} />
+              <Drawer.Screen name="UserProfile" component={UserProfileScreen} options={{
+                title: '',
+              }} />
 
-              
             </Drawer.Navigator>
           </>
         }
