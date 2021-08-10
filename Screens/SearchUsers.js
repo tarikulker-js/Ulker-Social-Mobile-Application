@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, Dimensions, Alert } from 'react-native';
+import { View, Text, Image, Dimensions, Alert, ScrollView } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import axios from 'axios';
 import Appbar from '../components/AppBar'
@@ -14,11 +14,8 @@ function SearchUsers(){
       <TextInput label="Email ya da Tam Ad" style={{ width: window.width }} onChangeText={(value) => {
         axios.post(`${API_URL}/search-users`, { query: value })
         .then((getedUsers) => {
-          setUsers(getedUsers.users);
-          console.log(getedUsers);
-
-          fetch(`${API_URL}/`, { body: JSON.stringify({ query: getedUsers })})
-
+          setUsers(getedUsers.data.users);
+          
         }).catch((err) => alert(err))
 
       }} />
@@ -28,15 +25,37 @@ function SearchUsers(){
             ?
           <Text> Kullanıcı Yok. </Text>
             :
-          users.map((user) => {
-            <View style={{ backgroundColor: 'red', width: window.width, height: 40 }}>
-              <Image source={{ uri: user.pic }} style={{ width: 100, height: 100 }} />
-              <Text>{user.name}</Text>
-            </View>
-          })
-        }
+          <ScrollView>
+            {users.map((user) => {
+              return(
+                <View style={{ backgroundColor: "red", width: window.width, height: 70, flex: 1, flexWrap: 'wrap' }}>
+                  <Image source={{ uri: user.pic }} style={{ width: 50, height: 50 }} />
+                  <Text>{user.name}</Text>
+                  <Text style={{ fontSize: 15 }}>{user.email}</Text>
+
+                </View>
+              )
+            })}
+          </ScrollView>
+            
+      }
     </View>
   )
 }
 
 export default SearchUsers;
+
+/*users.map((user) => {
+
+            <View>
+
+              <Image source={{ uri: user.pic }} style={{ width: 50, height: 50 }} />
+
+              <Text>{user.name}</Text>
+
+              <Text>{user.email}</Text>
+
+            </View>
+
+          })*/
+

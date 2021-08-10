@@ -15,6 +15,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { FontAwesome, EvilIcons, Ionicons, MaterialIcons} from 'react-native-vector-icons';
 import LocalStorage from '@react-native-async-storage/async-storage';
 
+import ConnectionInfo from '@react-native-community/netinfo';
+
 //Screens
 import HomeScreen from './Screens/Home';
 import DiscoverScreen from './Screens/Discover';
@@ -46,6 +48,7 @@ const Navbar = () => {
 
 const App = ({ navigation }) => {
   var [jwt, setJwt] = React.useState();
+  var [connnection, setConnection] = React.useState();
 
   React.useEffect(() => {
     setInterval(() => {
@@ -53,54 +56,68 @@ const App = ({ navigation }) => {
       .then((jwt) => {
         setJwt(jwt);
       })
+
+      ConnectionInfo.fetch().then((connection) => {
+        console.log("Connection type: " + connection.type);
+        console.log("Connection Checked?" + connection.isConnected);
+        //alert(connection.type)
+
+        setConnection(connection.isConnected);
+
+      })
+      
     }, 100)
   })
 
   return (
+    connnection
+      ?
     <NavigationContainer>
-        {
-          !jwt ?
-          <Stack.Navigator detachInactiveScreens>
-            <Stack.Screen name="Login" component={LoginScreen} options={{
-              title: "Ulker Social'a Hoşgeldiniz!"
+      {
+        !jwt ?
+        <Stack.Navigator detachInactiveScreens>
+          <Stack.Screen name="Login" component={LoginScreen} options={{
+            title: "Ulker Social'a Hoşgeldiniz!"
+          }} />
+          <Stack.Screen name="Register" component={RegisterScreen} options={{
+            title: "Ulker Social'a Hoşgeldiniz!"
+          }} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{
+            title: "Ulker Social'a Hoşgeldiniz!"
+          }} />
+        </Stack.Navigator>
+        :
+        <>
+          <Drawer.Navigator>
+            <Drawer.Screen name="Home" component={HomeScreen} options={{
+              title: 'Ulker Social'
             }} />
-            <Stack.Screen name="Register" component={RegisterScreen} options={{
-              title: "Ulker Social'a Hoşgeldiniz!"
+            <Drawer.Screen name="Discover" component={DiscoverScreen} options={{
+              title: 'Keşfet'
             }} />
-            <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} options={{
-              title: "Ulker Social'a Hoşgeldiniz!"
+            <Drawer.Screen name="Navigator" component={NavigatorScreen} options={{
+              title: 'Profil',
             }} />
-          </Stack.Navigator>
-          :
-          <>
-            <Drawer.Navigator>
-              <Drawer.Screen name="Home" component={HomeScreen} options={{
-                title: 'Ulker Social'
-              }} />
-              <Drawer.Screen name="Discover" component={DiscoverScreen} options={{
-                title: 'Keşfet'
-              }} />
-              <Drawer.Screen name="Navigator" component={NavigatorScreen} options={{
-                title: 'Profil',
-              }} />
-              <Drawer.Screen name="Search" component={SearchUsersScreen} options={{
-                title: 'Kullanıcı Arayın',
-              }} />
-              <Drawer.Screen name="Logout" component={LogoutScreen} options={{
-                title: 'Hoşçakalın 👋 '
-              }} />
-              <Drawer.Screen name="Profile" component={ProfileScreen} options={{
-                title: '',
-              }} />
-              <Drawer.Screen name="UserProfile" component={UserProfileScreen} options={{
-                title: '',
-              }} />
+            <Drawer.Screen name="Search" component={SearchUsersScreen} options={{
+              title: 'Kullanıcı Arayın',
+            }} />
+            <Drawer.Screen name="Logout" component={LogoutScreen} options={{
+              title: 'Hoşçakalın 👋 '
+            }} />
+            <Drawer.Screen name="Profile" component={ProfileScreen} options={{
+              title: '',
+            }} />
+            <Drawer.Screen name="UserProfile" component={UserProfileScreen} options={{
+              title: '',
+            }} />
 
-            </Drawer.Navigator>
-          </>
-        }
-      <Navbar />
-    </NavigationContainer>
+          </Drawer.Navigator>
+        </>
+      }
+    <Navbar />
+  </NavigationContainer>
+    :
+    <Text>Lütfen internete bağlanınız. </Text>
   );
 };
 
