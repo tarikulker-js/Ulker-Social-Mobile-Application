@@ -5,9 +5,9 @@ import {
   StyleSheet,
   Button,
   Image,
-  Alert
+  Alert,
+  TouchableOpacity
 } from 'react-native';
-import { TouchableOpacity as TO } from 'react-native-gesture-handler';
 import { Appbar } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -89,7 +89,7 @@ const App = ({ navigation }) => {
         :
         <>
           <Drawer.Navigator>
-            <Drawer.Screen name="Home" component={HomeScreen} options={{
+            <Drawer.Screen name="Home" component={SearchUsersScreen} options={{
               title: 'Ulker Social'
             }} />
             <Drawer.Screen name="Discover" component={DiscoverScreen} options={{
